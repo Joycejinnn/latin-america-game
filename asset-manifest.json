@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/latin-america-game/static/css/main.9f37c819.css",
+    "main.js": "/latin-america-game/static/js/main.0849fd2a.js",
+    "static/js/453.2dff0709.chunk.js": "/latin-america-game/static/js/453.2dff0709.chunk.js",
+    "index.html": "/latin-america-game/index.html",
+    "main.9f37c819.css.map": "/latin-america-game/static/css/main.9f37c819.css.map",
+    "main.0849fd2a.js.map": "/latin-america-game/static/js/main.0849fd2a.js.map",
+    "453.2dff0709.chunk.js.map": "/latin-america-game/static/js/453.2dff0709.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9f37c819.css",
+    "static/js/main.0849fd2a.js"
+  ]
+}
