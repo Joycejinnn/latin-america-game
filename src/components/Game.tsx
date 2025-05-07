@@ -11,11 +11,11 @@ interface GameState {
     reputation: number;
   };
   traits: {
-    terrainKnowledge: boolean;
-    communityLeader: boolean;
-    resilience: boolean;
-    negotiator: boolean;
-    compassionateLeader: boolean;
+    TerrainKnowledge: boolean;
+    CommunityLeader: boolean;
+    Resilience: boolean;
+    Negotiator: boolean;
+    CompassionateLeader: boolean;
   };
   currentScenario: string;
   choices: string[];
@@ -38,11 +38,11 @@ const Game: React.FC = () => {
       reputation: 0
     },
     traits: {
-      terrainKnowledge: true,
-      communityLeader: true,
-      resilience: true,
-      negotiator: false,
-      compassionateLeader: false
+      TerrainKnowledge: true,
+      CommunityLeader: true,
+      Resilience: true,
+      Negotiator: false,
+      CompassionateLeader: false
     },
     currentScenario: "In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.\n\nYou are Amaru, a young indigenous man known in your community for:\n- Your deep understanding of the local terrain and the hidden trails in the mountains\n- Your close tie to the community and your ability to handle disputes between families\n- Your strong dissatisfaction against the colonizers",
     choices: ["Attempt to negotiate with the tax collector", "Help villagers hide valuables in the hills"],
@@ -58,7 +58,7 @@ const Game: React.FC = () => {
       case 0: // Initial scenario
         if (choice === "Attempt to negotiate with the tax collector") {
           newState.stats.strategy += 5;
-          newState.traits.negotiator = true;
+          newState.traits.Negotiator = true;
           newState.currentScenario = "The tax collector scoffs but impressed by your community situation, agrees to postpone the payment slightly.";
           newState.choices = ["Discuss rebellion rumors with the elder", "Continue dealing with tax issues"];
         } else if (choice === "Help villagers hide valuables in the hills") {
@@ -167,7 +167,7 @@ const Game: React.FC = () => {
         } else if (choice === "Help the newcomers") {
           newState.stats.unity += 5;
           newState.stats.reputation += 10;
-          newState.traits.compassionateLeader = true;
+          newState.traits.CompassionateLeader = true;
           newState.currentScenario = "Earns the gratitude of the newcomers and enhances your reputation.";
         }
         newState.currentBranch = 6;
@@ -224,7 +224,7 @@ const Game: React.FC = () => {
 
       case 8: // Corregidor confrontation (Branch 2)
         if (choice === "Plead with the corregidor") {
-          if (newState.traits.negotiator && newState.stats.unity >= 25) {
+          if (newState.traits.Negotiator && newState.stats.unity >= 25) {
             newState.stats.strategy += 5;
             newState.stats.suspicion += 5;
             newState.currentScenario = "The magistrate is unmoved but, fearing unrest, agrees to slightly reduce his demands.";
