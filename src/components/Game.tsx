@@ -78,9 +78,11 @@ const Game: React.FC = () => {
             "The elder expresses the necessity of change",
             "The elder recalls stories of Inca resistance"
           ];
+          newState.currentBranch = 2;
         } else if (choice === "Continue dealing with tax issues") {
           newState.currentScenario = "The tax situation remains tense. The corregidor's demands continue to grow.";
           newState.choices = ["Join the rebellion", "Stay in the village"];
+          newState.currentBranch = 3;
         }
         break;
 
@@ -89,19 +91,18 @@ const Game: React.FC = () => {
           newState.stats.strategy += 5;
           newState.stats.courage -= 5;
           newState.currentScenario = "The elder emphasizes the strength of the Spanish army and the risks to your community. His words make you more cautious but also slightly decrease your hope.";
-          newState.choices = ["Join the rebellion", "Stay in the village"];
         } else if (choice === "The elder expresses the necessity of change") {
           newState.stats.courage += 5;
           newState.currentScenario = "The elder urges you to consider joining the rebellion, speaking of the possibility of finally getting rid of the colonizers' rule.";
-          newState.choices = ["Join the rebellion", "Stay in the village"];
         } else if (choice === "The elder recalls stories of Inca resistance") {
           newState.stats.unity += 5;
           newState.currentScenario = "The elder's stories of Inca resistance strengthen your connection to your heritage and fill you with hope for the future.";
-          newState.choices = ["Join the rebellion", "Stay in the village"];
         }
+        newState.choices = ["Join the rebellion", "Stay in the village"];
+        newState.currentBranch = 3;
         break;
 
-      case 3: // Rebellion branch
+      case 3: // Crossroads decision
         if (choice === "Join the rebellion") {
           if (newState.stats.courage >= 20) {
             newState.stats.courage += 10;
@@ -114,66 +115,67 @@ const Game: React.FC = () => {
           }
         } else if (choice === "Stay in the village") {
           newState.stats.unity += 10;
-          newState.currentBranch = 5;
+          newState.currentBranch = 8;
           newState.currentScenario = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community.";
           newState.choices = ["Plead with the corregidor", "Offer small supplies", "Refuse the requirement"];
         }
         break;
 
-      case 4: // Battle scenario
+      case 4: // Battle scenario (Branch 1)
         if (choice === "Use terrain knowledge to surround enemies") {
           if (newState.stats.strategy >= 25) {
             newState.stats.strategy += 5;
             newState.stats.unity += 5;
             newState.currentScenario = "The rebels achieve a surprising victory due to your terrain strategy, gaining valuable supplies.";
-            newState.choices = ["Distribute food equally", "Reward the brave fighters", "Help the newcomers"];
           } else {
             newState.currentScenario = "Your strategy is not sufficient for this complex maneuver.";
             newState.choices = ["Fight bravely at the front", "Protect the wounded"];
+            return setGameState(newState);
           }
         } else if (choice === "Fight bravely at the front") {
           if (newState.stats.courage >= 25) {
             newState.stats.courage -= 5;
             newState.currentScenario = "The rebels hold their ground, but suffer heavily.";
-            newState.choices = ["Distribute food equally", "Reward the brave fighters", "Help the newcomers"];
           } else {
             newState.currentScenario = "Your courage is not enough for this dangerous position.";
             newState.choices = ["Use terrain knowledge to surround enemies", "Protect the wounded"];
+            return setGameState(newState);
           }
         } else if (choice === "Protect the wounded") {
           if (newState.stats.unity >= 25) {
             newState.stats.unity += 2;
             newState.stats.courage -= 2;
             newState.currentScenario = "Few people are lost, and the fight ends in a retreat.";
-            newState.choices = ["Distribute food equally", "Reward the brave fighters", "Help the newcomers"];
           } else {
             newState.currentScenario = "Your unity is not enough to effectively protect the wounded.";
             newState.choices = ["Use terrain knowledge to surround enemies", "Fight bravely at the front"];
+            return setGameState(newState);
           }
         }
+        newState.currentBranch = 5;
+        newState.choices = ["Distribute food equally", "Reward the brave fighters", "Help the newcomers"];
         break;
 
-      case 5: // Food distribution
+      case 5: // Food distribution (Branch 1)
         if (choice === "Distribute food equally") {
           newState.stats.unity += 10;
           newState.stats.strategy -= 5;
           newState.currentScenario = "Some higher-ranking rebels complain, but the common fighters are grateful.";
-          newState.choices = ["Explore the hidden path alone", "Report to the leadership"];
         } else if (choice === "Reward the brave fighters") {
           newState.stats.courage += 10;
           newState.stats.unity -= 10;
           newState.currentScenario = "Distribute the brave ones with more food, but may cause discontent and jealousy among those who contributed less.";
-          newState.choices = ["Explore the hidden path alone", "Report to the leadership"];
         } else if (choice === "Help the newcomers") {
           newState.stats.unity += 5;
           newState.stats.reputation += 10;
           newState.traits.compassionateLeader = true;
           newState.currentScenario = "Earns the gratitude of the newcomers and enhances your reputation.";
-          newState.choices = ["Explore the hidden path alone", "Report to the leadership"];
         }
+        newState.currentBranch = 6;
+        newState.choices = ["Explore the hidden path alone", "Report to the leadership"];
         break;
 
-      case 6: // Hidden path
+      case 6: // Hidden path (Branch 1)
         if (choice === "Explore the hidden path alone") {
           if (newState.stats.courage >= 30) {
             newState.stats.courage += 5;
@@ -182,6 +184,7 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your courage is not enough to explore the path alone.";
             newState.choices = ["Report to the leadership"];
+            return setGameState(newState);
           }
         } else if (choice === "Report to the leadership") {
           if (newState.stats.unity >= 30) {
@@ -191,40 +194,49 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your unity is not enough to effectively report to the leadership.";
             newState.choices = ["Explore the hidden path alone"];
+            return setGameState(newState);
           }
+        }
+        newState.currentBranch = 7;
+        // Check for ending
+        const ending = checkEnding(newState);
+        if (ending) {
+          newState.gameEnded = true;
+          newState.ending = ending;
         }
         break;
 
-      case 7: // Independent path
+      case 8: // Corregidor confrontation (Branch 2)
         if (choice === "Plead with the corregidor") {
           if (newState.traits.negotiator && newState.stats.unity >= 25) {
             newState.stats.strategy += 5;
             newState.stats.suspicion += 5;
             newState.currentScenario = "The magistrate is unmoved but, fearing unrest, agrees to slightly reduce his demands.";
-            newState.choices = ["Help the wounded rebels", "Refuse to help the rebels"];
           } else {
             newState.currentScenario = "You lack the necessary traits or unity to effectively plead with the corregidor.";
             newState.choices = ["Offer small supplies", "Refuse the requirement"];
+            return setGameState(newState);
           }
         } else if (choice === "Offer small supplies") {
           newState.stats.strategy += 10;
           newState.stats.suspicion += 10;
           newState.currentScenario = "The corregidor accepts the offer, but stays alert to the villagers.";
-          newState.choices = ["Help the wounded rebels", "Refuse to help the rebels"];
         } else if (choice === "Refuse the requirement") {
           if (newState.stats.courage >= 30) {
             newState.stats.courage -= 15;
             newState.stats.suspicion += 15;
             newState.currentScenario = "The corregidor is enraged and threatens immediate retaliation.";
-            newState.choices = ["Help the wounded rebels", "Refuse to help the rebels"];
           } else {
             newState.currentScenario = "Your courage is not enough to openly defy the corregidor.";
             newState.choices = ["Plead with the corregidor", "Offer small supplies"];
+            return setGameState(newState);
           }
         }
+        newState.currentBranch = 9;
+        newState.choices = ["Help the wounded rebels", "Refuse to help the rebels"];
         break;
 
-      case 8: // Wounded rebels
+      case 9: // Wounded rebels (Branch 2)
         if (choice === "Help the wounded rebels") {
           newState.stats.unity += 10;
           newState.stats.suspicion += 10;
@@ -236,21 +248,21 @@ const Game: React.FC = () => {
           newState.stats.reputation -= 5;
           newState.currentScenario = "The rebels were forced to leave the village. For now, the village is spared any suspicion from the colonial forces, and life continues with tense normalcy.";
         }
+        // Check for ending
+        const ending = checkEnding(newState);
+        if (ending) {
+          newState.gameEnded = true;
+          newState.ending = ending;
+        }
         break;
-    }
-    
-    // Check for ending conditions
-    const ending = checkEnding(newState);
-    if (ending) {
-      newState.gameEnded = true;
-      newState.ending = ending;
     }
     
     setGameState(newState);
   };
 
   const checkEnding = (state: GameState) => {
-    if (state.currentBranch === 4) { // Rebellion branch endings
+    // Branch 1 endings (after scenario 7)
+    if (state.currentBranch === 7) {
       if (state.stats.strategy >= 25 && state.stats.unity >= 25 && state.stats.courage >= 25) {
         return {
           title: "Legendary of the Andes",
@@ -272,7 +284,10 @@ const Game: React.FC = () => {
           description: "You are gradually pulled away from the front lines of the rebellion. Lacking direction, courage, and unity, you remain just a witness to history rather than a part of it."
         };
       }
-    } else if (state.currentBranch === 5) { // Independent path endings
+    }
+    
+    // Branch 2 endings (after scenario 9)
+    if (state.currentBranch === 9) {
       if (state.stats.strategy >= 25 && state.stats.unity >= 25 && 
           state.stats.courage >= 25 && state.stats.suspicion <= 50) {
         return {
@@ -297,6 +312,7 @@ const Game: React.FC = () => {
         };
       }
     }
+    
     return null;
   };
 
