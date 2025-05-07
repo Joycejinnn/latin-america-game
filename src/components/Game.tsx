@@ -194,14 +194,33 @@ const Game: React.FC = () => {
             newState.choices = ["Explore the hidden path alone"];
           }
         }
-        // newState.currentBranch = 7;
-        // Check for ending
-        let endingResult = checkEnding(newState);
+        newState.currentBranch = 7;
+        return setGameState(newState);
+
+      case 7: // Final battle preparation (Branch 1)
+        newState.currentScenario = "The final battle approaches. Your decisions and leadership have shaped the rebellion's course. The Spanish forces are gathering, and the fate of your people hangs in the balance.";
+        if (newState.stats.strategy >= 25 && newState.stats.unity >= 25 && newState.stats.courage >= 25) {
+          newState.stats.strategy += 10;
+          newState.stats.unity += 10;
+          newState.stats.courage += 10;
+        } else if (newState.stats.strategy >= 25 && newState.stats.courage < 25) {
+          newState.stats.strategy += 10;
+          newState.stats.unity += 5;
+        } else if (newState.stats.strategy < 25 && newState.stats.courage >= 25) {
+          newState.stats.courage += 10;
+          newState.stats.unity -= 5;
+        } else {
+          newState.stats.strategy -= 5;
+          newState.stats.unity -= 5;
+          newState.stats.courage -= 5;
+        }
+        
+        const endingResult = checkEnding(newState);
         if (endingResult) {
           newState.gameEnded = true;
           newState.ending = endingResult;
         }
-        break;
+        return setGameState(newState);
 
       case 8: // Corregidor confrontation (Branch 2)
         if (choice === "Plead with the corregidor") {
