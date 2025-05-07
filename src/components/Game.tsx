@@ -342,9 +342,9 @@ const Game: React.FC = () => {
           <span>Suspicion: {gameState.stats.suspicion}</span>
           <span>Reputation: {gameState.stats.reputation}</span>
         </div>
-        <div className="traits">
+        <div className="stats">
           {Object.entries(gameState.traits).map(([trait, unlocked]) => (
-            unlocked && <span key={trait} className="trait">{trait}</span>
+            unlocked && <span key={trait}>{trait}</span>
           ))}
         </div>
       </div>

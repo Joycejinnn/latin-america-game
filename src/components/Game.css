@@ -40,10 +40,11 @@
 
 .trait {
   padding: 5px 10px;
-  background-color: #1a3dbc;
+  background-color: #4CAF50;
   color: white;
   border-radius: 3px;
   font-size: 0.9em;
+  color: #333;
 }
 
 .scenario {
