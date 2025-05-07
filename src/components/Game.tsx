@@ -69,6 +69,7 @@ const Game: React.FC = () => {
           newState.choices = ["Discuss rebellion rumors with the elder", "Continue dealing with tax issues"];
         }
         newState.currentBranch = 1;
+        return setGameState(newState);
         break;
 
       case 1: // Elder discussion
@@ -84,7 +85,7 @@ const Game: React.FC = () => {
           newState.choices = ["Join the rebellion", "Stay in the village"];
         }
         newState.currentBranch = 2;
-        break;
+        return setGameState(newState);
 
       case 2: // Elder's advice
         if (choice === "The elder warns against the action") {
@@ -100,7 +101,7 @@ const Game: React.FC = () => {
         }
         newState.choices = ["Join the rebellion", "Stay in the village"];
         newState.currentBranch = 3;
-        break;
+        return setGameState(newState);
 
       case 3: // Crossroads decision
         if (choice === "Join the rebellion") {
@@ -119,7 +120,7 @@ const Game: React.FC = () => {
           newState.currentScenario = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community.";
           newState.choices = ["Plead with the corregidor", "Offer small supplies", "Refuse the requirement"];
         }
-        break;
+        return setGameState(newState);
 
       case 4: // Battle scenario (Branch 1)
         if (choice === "Use terrain knowledge to surround enemies") {
@@ -130,7 +131,6 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your strategy is not sufficient for this complex maneuver.";
             newState.choices = ["Fight bravely at the front", "Protect the wounded"];
-            return setGameState(newState);
           }
         } else if (choice === "Fight bravely at the front") {
           if (newState.stats.courage >= 25) {
@@ -139,7 +139,6 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your courage is not enough for this dangerous position.";
             newState.choices = ["Use terrain knowledge to surround enemies", "Protect the wounded"];
-            return setGameState(newState);
           }
         } else if (choice === "Protect the wounded") {
           if (newState.stats.unity >= 25) {
@@ -154,7 +153,7 @@ const Game: React.FC = () => {
         }
         newState.currentBranch = 5;
         newState.choices = ["Distribute food equally", "Reward the brave fighters", "Help the newcomers"];
-        break;
+        return setGameState(newState);
 
       case 5: // Food distribution (Branch 1)
         if (choice === "Distribute food equally") {
@@ -173,7 +172,7 @@ const Game: React.FC = () => {
         }
         newState.currentBranch = 6;
         newState.choices = ["Explore the hidden path alone", "Report to the leadership"];
-        break;
+        return setGameState(newState);
 
       case 6: // Hidden path (Branch 1)
         if (choice === "Explore the hidden path alone") {
@@ -184,7 +183,6 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your courage is not enough to explore the path alone.";
             newState.choices = ["Report to the leadership"];
-            return setGameState(newState);
           }
         } else if (choice === "Report to the leadership") {
           if (newState.stats.unity >= 30) {
@@ -194,7 +192,6 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your unity is not enough to effectively report to the leadership.";
             newState.choices = ["Explore the hidden path alone"];
-            return setGameState(newState);
           }
         }
         // newState.currentBranch = 7;
@@ -215,7 +212,6 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "You lack the necessary traits or unity to effectively plead with the corregidor.";
             newState.choices = ["Offer small supplies", "Refuse the requirement"];
-            return setGameState(newState);
           }
         } else if (choice === "Offer small supplies") {
           newState.stats.strategy += 10;
@@ -229,11 +225,11 @@ const Game: React.FC = () => {
           } else {
             newState.currentScenario = "Your courage is not enough to openly defy the corregidor.";
             newState.choices = ["Plead with the corregidor", "Offer small supplies"];
-            return setGameState(newState);
           }
         }
         newState.currentBranch = 9;
         newState.choices = ["Help the wounded rebels", "Refuse to help the rebels"];
+        return setGameState(newState);
         break;
 
       case 9: // Wounded rebels (Branch 2)
