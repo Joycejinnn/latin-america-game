@@ -199,10 +199,10 @@ const Game: React.FC = () => {
         }
         newState.currentBranch = 7;
         // Check for ending
-        const ending = checkEnding(newState);
-        if (ending) {
+        let endingResult = checkEnding(newState);
+        if (endingResult) {
           newState.gameEnded = true;
-          newState.ending = ending;
+          newState.ending = endingResult;
         }
         break;
 
