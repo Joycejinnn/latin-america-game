@@ -42,6 +42,7 @@ Stat Change: Courage +10.
 Option 4.2: Choose to stay in your village, prioritizing the safety of your community above all else. You believe the best way to protect them is to stay neutral or find your own way to resist.
 Result: Leads to Branch 2: The Independent Path.
 Stat Change: Unity +10.
+
 Branch 1: Following Túpac Amaru II
 You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.
 Your group soon gets involved in a small-scale fight with a group of Spanish colonial soldiers. Although the rebels are poorly equipped, they fight with great bravery.
