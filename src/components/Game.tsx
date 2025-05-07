@@ -68,6 +68,7 @@ const Game: React.FC = () => {
           newState.currentScenario = "The tax collector leaves with fewer tributes but suspects the community is hiding resources.";
           newState.choices = ["Discuss rebellion rumors with the elder", "Continue dealing with tax issues"];
         }
+        newState.currentBranch = 1;
         break;
 
       case 1: // Elder discussion
@@ -78,12 +79,11 @@ const Game: React.FC = () => {
             "The elder expresses the necessity of change",
             "The elder recalls stories of Inca resistance"
           ];
-          newState.currentBranch = 2;
         } else if (choice === "Continue dealing with tax issues") {
           newState.currentScenario = "The tax situation remains tense. The corregidor's demands continue to grow.";
           newState.choices = ["Join the rebellion", "Stay in the village"];
-          newState.currentBranch = 3;
         }
+        newState.currentBranch = 2;
         break;
 
       case 2: // Elder's advice
@@ -197,7 +197,7 @@ const Game: React.FC = () => {
             return setGameState(newState);
           }
         }
-        newState.currentBranch = 7;
+        // newState.currentBranch = 7;
         // Check for ending
         let endingResult = checkEnding(newState);
         if (endingResult) {
