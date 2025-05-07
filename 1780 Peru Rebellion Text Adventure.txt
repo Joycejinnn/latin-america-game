@@ -1,0 +1,136 @@
+Indigenous Resistance in the Shadow of the 1780 Peru Rebellion
+The Shadow of the Andes
+In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.
+You are Amaru, a young indigenous man known in your community for :
+Your deep understanding of the local terrain and the hidden trails in the mountains.
+Result: Unlocks "Terrain Knowledge" (increases success chances in wilderness scenarios).
+Stat Change: Strategy +20.
+Your close tie to the community and your ability to handle disputes between families.
+Result: Unlocks "Community Leader" (increases influence in village interactions).
+Stat Change: Unity +20.
+Your strong dissatisfaction against the colonizers.
+Result: Unlocks "Resilience" (increases resistance to negative colonial interactions)
+.Stat Change: Courage +20.
+Whispers in the Wind (Growing Unrest)
+The Bourbon Reforms were launched during this period, aiming at strengthening central control and increasing revenue. Based on these requirements, the local corregidor has issued a new rule, further increasing the sales tax (alcabala) on essential goods. This pushes the community closer to the risk of starvation.
+A Spanish tax collector arrives in your village who is known for his cruelty, asking for immediate payment. The forced purchase of unwanted and overpriced Spanish goods (the reparto system)  often leads to debt and further exploitation.
+Option 2.1: Attempt to negotiate with the tax collector, explaining the community's hardship and pleading for more time for submitting the tax.
+Result: The tax collector scoffs but impressed by your community situation, agrees to postpone the payment slightly.
+Stat Change: Strategy +5.
+Follow-up: Unlocks the "Negotiator" trait (increases success rate in future diplomatic situations).
+Option 2.2: Use your knowledge of the terrain to help villagers hide some valuables in the nearby hills.
+Result: The tax collector leaves with fewer tributes but suspects the community is hiding resources.
+Stat Change: Strategy +5, Unity +5, Colonial Authority Suspicion +10.
+Follow-up: Increases the likelihood of future inspections.
+
+Travelers from neighboring villages bring news of a growing rebellion led by Túpac Amaru II. He has claimed to be a descendant of the last Inca emperor, and aims to achieve an end to the mita system and other injustices and reform the ruling system. They speak of his capture and execution of the cruel corregidor, which generates both hope and fear in the hearts of the people.
+You discuss these rumors with a respected elder in your village. He shares stories of past uprisings and the potential dangers and opportunities of joining such a movement. The Bourbon Reforms also affected the wealth and status of the Kurakas, which could influence their stance on the rebellion and the situation may be negative to the rebellions.
+Option 3.1: The elder warns against the action, emphasizing the strength of the Spanish army and the risks to your community.
+Result: Increases caution but slightly decreases hope.
+Stat Change: Strategy +5, Courage -5.
+Option 3.2: The elder expresses the necessity of change and the possibility of finally getting rid of the ruling from the colonizers, urging you to consider joining their cause.
+Result: Increases hope and courage.
+Stat Change: Courage +5.
+Option 3.3: The elder recalls stories of Inca resistance and describes images about a future where their people will regain the land.
+Result: Increases hope and strengthens your connection to your Inca heritage.
+Stat Change: Unity +5.
+The Crossroads (A Pivotal Decision)
+News of Túpac Amaru II's rebellion reaches your village directly. On one hand, his people arrive and persuade all indigenous people to join their fight against the colonizers. They promise to abolish the mita system, heavy taxes, and restore the of indigenous rights. On the other hand, the corregidor threatens severe punishment for anyone who joins the rebels.
+Option 4.1: Decide to join the rebellion, believing it is the only path to freedom and justice (Courage >= 20).
+Result: Leads to Branch 1: Following Túpac Amaru II.
+Stat Change: Courage +10.
+Option 4.2: Choose to stay in your village, prioritizing the safety of your community above all else. You believe the best way to protect them is to stay neutral or find your own way to resist.
+Result: Leads to Branch 2: The Independent Path.
+Stat Change: Unity +10.
+Branch 1: Following Túpac Amaru II
+You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.
+Your group soon gets involved in a small-scale fight with a group of Spanish colonial soldiers. Although the rebels are poorly equipped, they fight with great bravery.
+Option 5.1: Using your knowledge of the terrain to surround the enemies (requires Strategy ≥ 25).
+Result: The rebels achieve a surprising victory due to your terrain strategy, gaining valuable supplies.
+Stat Change: Knowledge +5, Unity +5.
+Option 5.2: Fight bravely at the front, inspiring your comrades with your courage (requires Courage ≥ 25).
+Result: The rebels hold their ground, but suffer heavily.
+Stat Change: Courage -5.
+Option 5.3: Focus on protecting the wounded and helping them retreat to the safe place (requires Unity ≥ 25).
+Result: Few people are lost, and the fight ends in a retreat.
+Stat Change: Unity +2, Courage -2.
+Scene: After a successful fight, the rebels gain a small supply of food. Under the situation that the colonial government transformed indigenous community lands into plantation-based economies, indigenous’s self-sufficiency got limited and food became a rare resource. You are assigned to manage the distribution.
+Option 6.1: Suggest that the food should be distributed equally among all rebels, regardless of rank or contribution.
+Result: Some higher-ranking rebels complain, but the common fighters are grateful.
+Stat Change: Unity +10, Strategy -5.
+Follow-up: Increases loyalty and support among lower-ranking soldiers.
+Option 6.2: Recon that those who fought most bravely in the recent fight should receive more.
+Result: Distribute the brave ones with more food, but may cause discontent and jealousy among those who contributed less.
+Stat Change: Courage +10, Unity -10.
+Follow-up: Some rebels get motivated, while others feel negative.
+Option 6.3: Notice a group of newly arrived, exhausted rebels who haven't received any food. Secretly let them get a portion before the general distribution.
+Result: Earns the gratitude of the newcomers and enhances your reputation.
+Stat Change: Unity +5, Reputation +10.
+Follow-up: Unlocks the "Compassionate Leader" trait (increases influence over new recruits).
+Scene: While scouting ahead of the main rebel force, you notice some unusual markings on a rock face, possibly indicating a hidden path into the mountains.
+Option 7.1: Explore the path alone first, hoping to gain a strategic advantage for the rebels (requires Courage ≥ 30).
+Result: You discover a shortcut but also spot a small group of Spanish soldiers. You get back quickly with this message, reorganize the scouting routine and warn everyone to feel alert.
+Stat Change: Courage +5, Strategy +5.
+Option 7.2: Report the discovery to the rebel leadership and suggest a small team to explore together (requires Unity ≥ 30).
+Result: A scouting group confirms the trail and its strategic value without alerting the Spanish.
+Stat Change: Unity +5, Strategy +5.
+
+Branch 2: The Independent Path
+You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community. The local corregidor’s threats heavily to the village, and a tense uncertainty permeates the air. Many indigenous communities also adopted strategies of local resistance and survival rather than directly joining the main rebellion.
+The local corregidor sends word that he expects the village to remain loyal and provide supplies for the Spanish troops. The elders choose you to speak on behalf of the community (requires "Community Leader" and Unity ≥ 25).
+Option 8.1: Plead with the corregidor, emphasizing the village's poverty and inability to meet his demands (requires "Negotiator" trait).
+Result: The magistrate is unmoved but, fearing unrest, agrees to slightly reduce his demands.
+Stat Change: Strategy +5, Colonial Authority Suspicion +5.
+Option 8.2: Offer a small amount of supplies but subtly warn that excessive demands could lead to unrest.
+Result: The corregidor accepts the offer, but stays alert to the villagers.
+Stat Change: Strategy +10, Colonial Authority Suspicion +10.
+Option 8.3: Refuse the requirement and declare that the village will not support the oppressors (requires Courage ≥ 30).
+Result: The corregidor is enraged and threatens immediate retaliation.
+Stat Change: Courage -15, Colonial Authority Suspicion +15.
+Follow-up: Increases the likelihood of a Spanish attack on the village.
+A small group of wounded rebels, fleeing from a recent battle, seeks refuge in your village.
+Option 9.1: Secretly provide them with food and shelter, risking the corregidor's wrath.
+Result: The rebels recover and eventually leave, grateful for your help. Before departing, their leader promised to remember your courage. The village remains secret, but rumors begin to spread. One child speaks out of turn, a traveling merchant asks too many questions, and soon, word may reach the corregidor.
+Stat Change: Unity +10, Colonial Authority Suspicion +10, Reputation +10.
+Option 9.2: Refuse their entry, fearing the consequences for your village.
+Result: The rebels were forced to leave the village. For now, the village is spared any suspicion from the colonial forces, and life continues with tense normalcy. However, some villagers whisper that your decision lacked compassion, while others wonder whether rejecting the rebels might one day come back to attack them. A few younger villagers begin questioning your leadership, planting seeds of doubt that may grow over time.
+Stat Change: Unity -5, Colonial Authority Suspicion -5, Reputation -5.
+
+
+Branch 1: Following Túpac Amaru II - Ending Matrix （High>=25, Low<25）
+
+Stat Combination
+Ending Title
+Description
+All High (Strategy High, Unity High, Courage High)
+"Legendary  of the Andes"
+You become a legendary leader—wise, brave, and deeply loved by your people. Under your guidance, the regions that you fight for successfully resist colonial control and remember your name for centuries.
+Strategy High, Courage Low
+"The Quiet Shield"
+You protect your people through wisdom and solidarity, avoiding direct confrontation. Though the rebellion falters, your village survives and thrives in secret.
+Strategy Low, Courage High
+"Where Hope Burned"
+You charge into the rebellion with passion but little support or planning. You die a hero, but your efforts are buried in blood and didn’t make a big change in the oppression situation.
+All Low (Strategy Low, Unity Low, Courage Low)
+"The Very End"
+You are gradually pulled away from the front lines of the rebellion. Lacking direction, courage, and unity, you remain just a witness to history rather than a part of it.
+
+Branch 2: The Independent Path - Ending Matrix
+
+Ending Title
+Conditions
+Narrative Summary
+The Shield of the People
+Strategy ≥ 25, Unity ≥ 25, Courage ≥ 25, Suspicion ≤ 50
+You navigated between rebellion and survival secretly without alerting the officials, helping the resistance while protecting your people. Your name becomes a symbol of wisdom and resilience.
+The Silent Guardian
+Strategy ≥ 25, Courage < 25, Suspicion ≤ 50
+You chose moderation and patience. Through negotiation and careful offerings, you preserved the village. Some admire your wisdom; others question your indifferent to the rebellion cause.
+Where Hope Burned
+Strategy < 25, Courage ≥ 25, Unity ≤ 15, Suspicion ≥ 50
+Your open defiance sparked colonial retaliation. Lacking unity, the village collapsed under threat and pressure. Though your rebellion failed, your story becomes legend.
+The Very End
+Strategy < 25, Courage ≤ 25, Suspicion ≤ 50
+You never made a firm stand. The village faded into obscurity, forgotten by both the colonizers and history. Silence replaced memory.
+
+

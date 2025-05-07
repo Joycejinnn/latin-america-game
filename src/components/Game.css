@@ -13,13 +13,37 @@
   margin-bottom: 20px;
 }
 
-.resources {
+.stats {
   display: flex;
   justify-content: space-around;
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
   margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.stats span {
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+
+.traits {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.trait {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 3px;
+  font-size: 0.9em;
 }
 
 .scenario {
@@ -28,6 +52,7 @@
   border-radius: 5px;
   margin: 20px 0;
   line-height: 1.6;
+  white-space: pre-line;
 }
 
 .choices {
@@ -44,8 +69,37 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  text-align: left;
 }
 
 .choice-button:hover {
+  background-color: #45a049;
+}
+
+.ending {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.ending h2 {
+  color: #4CAF50;
+  margin-bottom: 15px;
+}
+
+.ending button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ending button:hover {
   background-color: #45a049;
 } 
