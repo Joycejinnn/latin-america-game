@@ -342,10 +342,13 @@ const Game: React.FC = () => {
           <span>Suspicion: {gameState.stats.suspicion}</span>
           <span>Reputation: {gameState.stats.reputation}</span>
         </div>
-        <div className="stats">
-          {Object.entries(gameState.traits).map(([trait, unlocked]) => (
-            unlocked && <span key={trait}>{trait}</span>
-          ))}
+        <div className="stats-container">
+          <h3>Traits</h3>
+          <div className="stats">
+            {Object.entries(gameState.traits).map(([trait, unlocked]) => (
+              unlocked && <span key={trait}>{trait}</span>
+            ))}
+          </div>
         </div>
       </div>
       
