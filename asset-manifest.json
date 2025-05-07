@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/latin-america-game/static/css/main.9f37c819.css",
-    "main.js": "/latin-america-game/static/js/main.0849fd2a.js",
+    "main.css": "/latin-america-game/static/css/main.0bcb5627.css",
+    "main.js": "/latin-america-game/static/js/main.a324b790.js",
     "static/js/453.2dff0709.chunk.js": "/latin-america-game/static/js/453.2dff0709.chunk.js",
     "index.html": "/latin-america-game/index.html",
-    "main.9f37c819.css.map": "/latin-america-game/static/css/main.9f37c819.css.map",
-    "main.0849fd2a.js.map": "/latin-america-game/static/js/main.0849fd2a.js.map",
+    "main.0bcb5627.css.map": "/latin-america-game/static/css/main.0bcb5627.css.map",
+    "main.a324b790.js.map": "/latin-america-game/static/js/main.a324b790.js.map",
     "453.2dff0709.chunk.js.map": "/latin-america-game/static/js/453.2dff0709.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9f37c819.css",
-    "static/js/main.0849fd2a.js"
+    "static/css/main.0bcb5627.css",
+    "static/js/main.a324b790.js"
   ]
 }
