@@ -316,7 +316,7 @@ const Game: React.FC = () => {
 
       case 2:
         if (
-          gameState.resultText === "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles."
+          lastResult === "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles."
         ) {
           // branch1
           newState.currentScenario = "Your group soon gets involved in a small-scale fight with a group of Spanish colonial soldiers. Although the rebels are poorly equipped, they fight with great bravery.";
