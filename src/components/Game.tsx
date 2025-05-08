@@ -60,224 +60,168 @@ const Game: React.FC = () => {
 
   const handleChoice = (choice: string) => {
     let newState = { ...gameState };
-    
+
     switch (gameState.currentBranch) {
       case 0: // Initial scenario
         if (choice === "Attempt to negotiate with the tax collector") {
           newState.stats.strategy += 5;
           newState.traits.Negotiator = true;
           newState.resultText = "The tax collector scoffs but impressed by your community situation, agrees to postpone the payment slightly.";
-          newState.resultPending = true;
         } else if (choice === "Help villagers hide valuables in the hills") {
           newState.stats.strategy += 5;
           newState.stats.unity += 5;
           newState.stats.suspicion += 10;
           newState.resultText = "The tax collector leaves with fewer tributes but suspects the community is hiding resources.";
-          newState.resultPending = true;
         }
-        return setGameState(newState);
+        newState.resultPending = true;
         break;
 
       case 1: // Elder discussion
-        if (choice === "Discuss rebellion rumors with the elder") {
-          newState.currentScenario = "Travelers from neighboring villages bring news of a growing rebellion led by Túpac Amaru II. He has claimed to be a descendant of the last Inca emperor, and aims to achieve an end to the mita system and other injustices and reform the ruling system.";
-          newState.choices = [
-            "The elder warns against the action",
-            "The elder expresses the necessity of change",
-            "The elder recalls stories of Inca resistance"
-          ];
-        } else if (choice === "Continue dealing with tax issues") {
-          newState.currentScenario = "The tax situation remains tense. The corregidor's demands continue to grow.";
-          newState.choices = ["Join the rebellion", "Stay in the village"];
-        }
-        newState.currentBranch = 2;
-        return setGameState(newState);
-
-      case 2: // Elder's advice
         if (choice === "The elder warns against the action") {
           newState.stats.strategy += 5;
           newState.stats.courage -= 5;
-          newState.currentScenario = "The elder emphasizes the strength of the Spanish army and the risks to your community. His words make you more cautious but also slightly decrease your hope.";
+          newState.resultText = "The elder emphasizes the strength of the Spanish army and the risks to your community. His words make you more cautious but also slightly decrease your hope.";
         } else if (choice === "The elder expresses the necessity of change") {
           newState.stats.courage += 5;
-          newState.currentScenario = "The elder urges you to consider joining the rebellion, speaking of the possibility of finally getting rid of the colonizers' rule.";
+          newState.resultText = "The elder urges you to consider joining the rebellion, speaking of the possibility of finally getting rid of the colonizers' rule.";
         } else if (choice === "The elder recalls stories of Inca resistance") {
           newState.stats.unity += 5;
-          newState.currentScenario = "The elder's stories of Inca resistance strengthen your connection to your heritage and fill you with hope for the future.";
+          newState.resultText = "The elder's stories of Inca resistance strengthen your connection to your heritage and fill you with hope for the future.";
         }
-        newState.choices = ["Join the rebellion", "Stay in the village"];
-        newState.currentBranch = 3;
-        return setGameState(newState);
+        newState.resultPending = true;
+        break;
 
-      case 3: // Crossroads decision
+      case 2: // Crossroads decision
         if (choice === "Join the rebellion") {
           if (newState.stats.courage >= 20) {
             newState.stats.courage += 10;
-            newState.currentBranch = 4;
-            newState.currentScenario = "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.";
-            newState.choices = ["Use terrain knowledge to surround enemies", "Fight bravely at the front", "Protect the wounded"];
+            newState.resultText = "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.";
           } else {
-            newState.currentScenario = "Your courage is not enough to join the rebellion. You must stay in the village.";
-            newState.choices = ["Stay in the village"];
+            newState.resultText = "Your courage is not enough to join the rebellion. You must stay in the village.";
           }
         } else if (choice === "Stay in the village") {
           newState.stats.unity += 10;
-          newState.currentBranch = 8;
-          newState.currentScenario = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community.";
-          newState.choices = ["Plead with the corregidor", "Offer small supplies", "Refuse the requirement"];
+          newState.resultText = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community.";
         }
-        return setGameState(newState);
+        newState.resultPending = true;
+        break;
 
-      case 4: // Battle scenario (Branch 1)
+      case 3: // Battle scenario (Branch 1)
         if (choice === "Use terrain knowledge to surround enemies") {
           if (newState.stats.strategy >= 25) {
             newState.stats.strategy += 5;
             newState.stats.unity += 5;
-            newState.currentScenario = "The rebels achieve a surprising victory due to your terrain strategy, gaining valuable supplies.";
+            newState.resultText = "The rebels achieve a surprising victory due to your terrain strategy, gaining valuable supplies.";
           } else {
-            newState.currentScenario = "Your strategy is not sufficient for this complex maneuver.";
-            newState.choices = ["Fight bravely at the front", "Protect the wounded"];
+            newState.resultText = "Your strategy is not sufficient for this complex maneuver.";
           }
         } else if (choice === "Fight bravely at the front") {
           if (newState.stats.courage >= 25) {
             newState.stats.courage -= 5;
-            newState.currentScenario = "The rebels hold their ground, but suffer heavily.";
+            newState.resultText = "The rebels hold their ground, but suffer heavily.";
           } else {
-            newState.currentScenario = "Your courage is not enough for this dangerous position.";
-            newState.choices = ["Use terrain knowledge to surround enemies", "Protect the wounded"];
+            newState.resultText = "Your courage is not enough for this dangerous position.";
           }
         } else if (choice === "Protect the wounded") {
           if (newState.stats.unity >= 25) {
             newState.stats.unity += 2;
             newState.stats.courage -= 2;
-            newState.currentScenario = "Few people are lost, and the fight ends in a retreat.";
+            newState.resultText = "Few people are lost, and the fight ends in a retreat.";
           } else {
-            newState.currentScenario = "Your unity is not enough to effectively protect the wounded.";
-            newState.choices = ["Use terrain knowledge to surround enemies", "Fight bravely at the front"];
-            return setGameState(newState);
+            newState.resultText = "Your unity is not enough to effectively protect the wounded.";
           }
         }
-        newState.currentBranch = 5;
-        newState.choices = ["Distribute food equally", "Reward the brave fighters", "Help the newcomers"];
-        return setGameState(newState);
+        newState.resultPending = true;
+        break;
 
       case 5: // Food distribution (Branch 1)
         if (choice === "Distribute food equally") {
           newState.stats.unity += 10;
           newState.stats.strategy -= 5;
-          newState.currentScenario = "Some higher-ranking rebels complain, but the common fighters are grateful.";
+          newState.resultText = "Some higher-ranking rebels complain, but the common fighters are grateful.";
         } else if (choice === "Reward the brave fighters") {
           newState.stats.courage += 10;
           newState.stats.unity -= 10;
-          newState.currentScenario = "Distribute the brave ones with more food, but may cause discontent and jealousy among those who contributed less.";
+          newState.resultText = "Distribute the brave ones with more food, but may cause discontent and jealousy among those who contributed less.";
         } else if (choice === "Help the newcomers") {
           newState.stats.unity += 5;
           newState.stats.reputation += 10;
           newState.traits.CompassionateLeader = true;
-          newState.currentScenario = "Earns the gratitude of the newcomers and enhances your reputation.";
+          newState.resultText = "Earns the gratitude of the newcomers and enhances your reputation.";
         }
-        newState.currentBranch = 6;
-        newState.choices = ["Explore the hidden path alone", "Report to the leadership"];
-        return setGameState(newState);
+        newState.resultPending = true;
+        break;
 
       case 6: // Hidden path (Branch 1)
         if (choice === "Explore the hidden path alone") {
           if (newState.stats.courage >= 30) {
             newState.stats.courage += 5;
             newState.stats.strategy += 5;
-            newState.currentScenario = "You discover a shortcut but also spot a small group of Spanish soldiers. You get back quickly with this message, reorganize the scouting routine and warn everyone to feel alert.";
+            newState.resultText = "You discover a shortcut but also spot a small group of Spanish soldiers. You get back quickly with this message, reorganize the scouting routine and warn everyone to feel alert.";
           } else {
-            newState.currentScenario = "Your courage is not enough to explore the path alone.";
-            newState.choices = ["Report to the leadership"];
+            newState.resultText = "Your courage is not enough to explore the path alone.";
           }
         } else if (choice === "Report to the leadership") {
           if (newState.stats.unity >= 30) {
             newState.stats.unity += 5;
             newState.stats.strategy += 5;
-            newState.currentScenario = "A scouting group confirms the trail and its strategic value without alerting the Spanish.";
+            newState.resultText = "A scouting group confirms the trail and its strategic value without alerting the Spanish.";
           } else {
-            newState.currentScenario = "Your unity is not enough to effectively report to the leadership.";
-            newState.choices = ["Explore the hidden path alone"];
+            newState.resultText = "Your unity is not enough to effectively report to the leadership.";
           }
         }
-        newState.currentBranch = 7;
-        return setGameState(newState);
+        newState.resultPending = true;
+        break;
 
       case 7: // Final battle preparation (Branch 1)
-        newState.currentScenario = "The final battle approaches. Your decisions and leadership have shaped the rebellion's course. The Spanish forces are gathering, and the fate of your people hangs in the balance.";
-        if (newState.stats.strategy >= 25 && newState.stats.unity >= 25 && newState.stats.courage >= 25) {
-          newState.stats.strategy += 10;
-          newState.stats.unity += 10;
-          newState.stats.courage += 10;
-        } else if (newState.stats.strategy >= 25 && newState.stats.courage < 25) {
-          newState.stats.strategy += 10;
-          newState.stats.unity += 5;
-        } else if (newState.stats.strategy < 25 && newState.stats.courage >= 25) {
-          newState.stats.courage += 10;
-          newState.stats.unity -= 5;
-        } else {
-          newState.stats.strategy -= 5;
-          newState.stats.unity -= 5;
-          newState.stats.courage -= 5;
-        }
-        
-        const endingResult = checkEnding(newState);
-        if (endingResult) {
-          newState.gameEnded = true;
-          newState.ending = endingResult;
-        }
-        return setGameState(newState);
+        newState.resultText = "The final battle approaches. Your decisions and leadership have shaped the rebellion's course. The Spanish forces are gathering, and the fate of your people hangs in the balance.";
+        newState.resultPending = true;
+        break;
 
-      case 8: // Corregidor confrontation (Branch 2)
+      case 4: // Branch 2: Independent path
         if (choice === "Plead with the corregidor") {
           if (newState.traits.Negotiator && newState.stats.unity >= 25) {
             newState.stats.strategy += 5;
             newState.stats.suspicion += 5;
-            newState.currentScenario = "The magistrate is unmoved but, fearing unrest, agrees to slightly reduce his demands.";
+            newState.resultText = "The magistrate is unmoved but, fearing unrest, agrees to slightly reduce his demands.";
           } else {
-            newState.currentScenario = "You lack the necessary traits or unity to effectively plead with the corregidor.";
-            newState.choices = ["Offer small supplies", "Refuse the requirement"];
+            newState.resultText = "You lack the necessary traits or unity to effectively plead with the corregidor.";
           }
         } else if (choice === "Offer small supplies") {
           newState.stats.strategy += 10;
           newState.stats.suspicion += 10;
-          newState.currentScenario = "The corregidor accepts the offer, but stays alert to the villagers.";
+          newState.resultText = "The corregidor accepts the offer, but stays alert to the villagers.";
         } else if (choice === "Refuse the requirement") {
           if (newState.stats.courage >= 30) {
             newState.stats.courage -= 15;
             newState.stats.suspicion += 15;
-            newState.currentScenario = "The corregidor is enraged and threatens immediate retaliation.";
+            newState.resultText = "The corregidor is enraged and threatens immediate retaliation.";
           } else {
-            newState.currentScenario = "Your courage is not enough to openly defy the corregidor.";
-            newState.choices = ["Plead with the corregidor", "Offer small supplies"];
+            newState.resultText = "Your courage is not enough to openly defy the corregidor.";
           }
         }
-        newState.currentBranch = 9;
-        newState.choices = ["Help the wounded rebels", "Refuse to help the rebels"];
-        return setGameState(newState);
+        newState.resultPending = true;
         break;
 
-      case 9: // Wounded rebels (Branch 2)
+      case 8: // Wounded rebels (Branch 2)
         if (choice === "Help the wounded rebels") {
           newState.stats.unity += 10;
           newState.stats.suspicion += 10;
           newState.stats.reputation += 10;
-          newState.currentScenario = "The rebels recover and eventually leave, grateful for your help. Before departing, their leader promised to remember your courage. The village remains secret, but rumors begin to spread.";
+          newState.resultText = "The rebels recover and eventually leave, grateful for your help. Before departing, their leader promised to remember your courage. The village remains secret, but rumors begin to spread.";
         } else if (choice === "Refuse to help the rebels") {
           newState.stats.unity -= 5;
           newState.stats.suspicion -= 5;
           newState.stats.reputation -= 5;
-          newState.currentScenario = "The rebels were forced to leave the village. For now, the village is spared any suspicion from the colonial forces, and life continues with tense normalcy.";
+          newState.resultText = "The rebels were forced to leave the village. For now, the village is spared any suspicion from the colonial forces, and life continues with tense normalcy.";
         }
-        // Check for ending
-        const ending = checkEnding(newState);
-        if (ending) {
-          newState.gameEnded = true;
-          newState.ending = ending;
-        }
+        newState.resultPending = true;
+        break;
+
+      default:
         break;
     }
-    
+
     setGameState(newState);
   };
 
@@ -295,8 +239,91 @@ const Game: React.FC = () => {
         ];
         newState.currentBranch = 1;
         break;
-      // 其他case同理，按你的剧情结构推进
-      // ...
+
+      case 1:
+        newState.currentScenario = "Do you join the rebellion or stay in the village?";
+        newState.choices = ["Join the rebellion", "Stay in the village"];
+        newState.currentBranch = 2;
+        break;
+
+      case 2:
+        if (
+          gameState.resultText === "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles."
+        ) {
+          // branch1
+          newState.currentScenario = "Your group soon gets involved in a small-scale fight with a group of Spanish colonial soldiers. Although the rebels are poorly equipped, they fight with great bravery.";
+          newState.choices = [
+            "Use terrain knowledge to surround enemies",
+            "Fight bravely at the front",
+            "Protect the wounded"
+          ];
+          newState.currentBranch = 3;
+        } else {
+          // branch2
+          newState.currentScenario = "The local corregidor sends word that he expects the village to remain loyal and provide supplies for the Spanish troops. The elders choose you to speak on behalf of the community.";
+          newState.choices = [
+            "Plead with the corregidor",
+            "Offer small supplies",
+            "Refuse the requirement"
+          ];
+          newState.currentBranch = 4;
+        }
+        break;
+
+      case 3:
+        newState.currentScenario = "After a successful fight, the rebels gain a small supply of food. You are assigned to manage the distribution.";
+        newState.choices = [
+          "Distribute food equally",
+          "Reward the brave fighters",
+          "Help the newcomers"
+        ];
+        newState.currentBranch = 5;
+        break;
+
+      case 5:
+        newState.currentScenario = "While scouting ahead of the main rebel force, you notice some unusual markings on a rock face, possibly indicating a hidden path into the mountains.";
+        newState.choices = [
+          "Explore the hidden path alone",
+          "Report to the leadership"
+        ];
+        newState.currentBranch = 6;
+        break;
+
+      case 6:
+        newState.currentScenario = "The final battle is coming. Prepare yourself and your people.";
+        newState.choices = [
+          "Face the final battle"
+        ];
+        newState.currentBranch = 7;
+        break;
+
+      case 7:
+        const ending1 = checkEnding({ ...newState, currentBranch: 7 });
+        if (ending1) {
+          newState.gameEnded = true;
+          newState.ending = ending1;
+        }
+        break;
+
+      case 4:
+        newState.currentScenario = "A small group of wounded rebels, fleeing from a recent battle, seeks refuge in your village.";
+        newState.choices = [
+          "Help the wounded rebels",
+          "Refuse to help the rebels"
+        ];
+        newState.currentBranch = 8;
+        break;
+
+      case 8:
+        const ending2 = checkEnding({ ...newState, currentBranch: 9 });
+        if (ending2) {
+          newState.gameEnded = true;
+          newState.ending = ending2;
+        }
+        break;
+
+      default:
+        break;
     }
     setGameState(newState);
   };
