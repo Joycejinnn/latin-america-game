@@ -337,6 +337,7 @@ const Game: React.FC = () => {
     <div className="game-container">
       <div className="game-header">
         <h1>The Resistance of the Andes</h1>
+        <h2>122090872 Yiyao Jin</h2>
       </div>
       {gameState.page === 1 && (
         <div>
