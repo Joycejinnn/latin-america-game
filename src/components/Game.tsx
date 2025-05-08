@@ -25,6 +25,7 @@ interface GameState {
     title: string;
     description: string;
   } | null;
+  page: number;
 }
 
 const Game: React.FC = () => {
@@ -48,7 +49,8 @@ const Game: React.FC = () => {
     choices: ["Attempt to negotiate with the tax collector", "Help villagers hide valuables in the hills"],
     currentBranch: 0,
     gameEnded: false,
-    ending: null
+    ending: null,
+    page: 1
   });
 
   const handleChoice = (choice: string) => {
@@ -335,45 +337,91 @@ const Game: React.FC = () => {
     <div className="game-container">
       <div className="game-header">
         <h1>The Resistance of the Andes</h1>
-        <div className="stats">
-          <span>Stategy: {gameState.stats.strategy}</span>
-          <span>Unity: {gameState.stats.unity}</span>
-          <span>Courage: {gameState.stats.courage}</span>
-          <span>Suspicion: {gameState.stats.suspicion}</span>
-          <span>Reputation: {gameState.stats.reputation}</span>
-        </div>
-        <div className="stats-container">
-          <h3>Traits</h3>
-          <div className="stats">
-            {Object.entries(gameState.traits).map(([trait, unlocked]) => (
-              unlocked && <span key={trait}>{trait}</span>
-            ))}
+      </div>
+      {gameState.page === 1 && (
+        <div>
+          <div className="scenario">
+            <p>
+              In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.
+            </p>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <button className="choice-button" onClick={() => setGameState({ ...gameState, page: 2 })}>
+              Next
+            </button>
           </div>
         </div>
-      </div>
-      
-      <div className="scenario">
-        <p>{gameState.currentScenario}</p>
-      </div>
-      
-      {!gameState.gameEnded ? (
-      <div className="choices">
-        {gameState.choices.map((choice, index) => (
-          <button 
-            key={index}
-            onClick={() => handleChoice(choice)}
-            className="choice-button"
-          >
-            {choice}
-          </button>
-        ))}
-      </div>
-      ) : (
-        <div className="ending">
-          <h2>{gameState.ending?.title}</h2>
-          <p>{gameState.ending?.description}</p>
-          <button onClick={() => window.location.reload()}>Start New Game</button>
+      )}
+      {gameState.page === 2 && (
+        <div>
+          <div className="scenario">
+            <p>
+              <b>You are Amaru, a young indigenous man known in your community for:</b>
+              <ul>
+                <li>Your deep understanding of the local terrain and the hidden trails in the mountains</li>
+                <li>Your close tie to the community and your ability to handle disputes between families</li>
+                <li>Your strong dissatisfaction against the colonizers</li>
+              </ul>
+            </p>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <button className="choice-button" onClick={() => {
+              setGameState({
+                ...gameState,
+                page: 3,
+                currentScenario: "A Spanish tax collector arrives in your village who is known for his cruelty, asking for immediate payment. The forced purchase of unwanted and overpriced Spanish goods (the reparto system) often leads to debt and further exploitation.",
+                choices: [
+                  "Attempt to negotiate with the tax collector",
+                  "Help villagers hide valuables in the hills"
+                ],
+                currentBranch: 0
+              });
+            }}>
+              Start
+            </button>
+          </div>
         </div>
+      )}
+      {gameState.page === 3 && (
+        <>
+          <div className="stats">
+            <span>Strategy: {gameState.stats.strategy}</span>
+            <span>Unity: {gameState.stats.unity}</span>
+            <span>Courage: {gameState.stats.courage}</span>
+            <span>Suspicion: {gameState.stats.suspicion}</span>
+            <span>Reputation: {gameState.stats.reputation}</span>
+          </div>
+          <div className="stats-container">
+            <h3>Traits</h3>
+            <div className="traits">
+              {Object.entries(gameState.traits).map(([trait, unlocked]) => (
+                unlocked && <span className="trait" key={trait}>{trait}</span>
+              ))}
+            </div>
+          </div>
+          <div className="scenario">
+            <p>{gameState.currentScenario}</p>
+          </div>
+          {!gameState.gameEnded ? (
+            <div className="choices">
+              {gameState.choices.map((choice, index) => (
+                <button 
+                  key={index}
+                  onClick={() => handleChoice(choice)}
+                  className="choice-button"
+                >
+                  {choice}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="ending">
+              <h2>{gameState.ending?.title}</h2>
+              <p>{gameState.ending?.description}</p>
+              <button onClick={() => window.location.reload()}>Start New Game</button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
