@@ -17,6 +17,7 @@ interface GameState {
     Resilience: boolean;
     Negotiator: boolean;
     CompassionateLeader: boolean;
+    Rebel: boolean;
   };
   currentScenario: string;
   choices: string[];
@@ -46,7 +47,8 @@ const Game: React.FC = () => {
       CommunityLeader: true,
       Resilience: true,
       Negotiator: false,
-      CompassionateLeader: false
+      CompassionateLeader: false,
+      Rebel: false
     },
     currentScenario: "In 1780, there was an Indian village under the Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.\n\nYou are Amaru, a young indigenous man known in your community for:\n- Your deep understanding of the local terrain and the hidden trails in the mountains\n- Your close tie to the community and your ability to handle disputes between families\n- Your strong dissatisfaction against the colonizers",
     choices: ["Attempt to negotiate with the tax collector", "Help villagers hide valuables in the hills"],
@@ -80,6 +82,7 @@ const Game: React.FC = () => {
         if (choice === "The elder warns against the action") {
           newState.stats.strategy += 5;
           newState.stats.courage -= 5;
+          newState.traits.Rebel = true;
           newState.resultText = " The elder warns against the action, emphasizing the strength of the Spanish army and the risks to your community. His words make you more cautious but also slightly decrease your hope.";
         } else if (choice === "The elder expresses the necessity of change") {
           newState.stats.courage += 5;
@@ -92,7 +95,7 @@ const Game: React.FC = () => {
         break;
 
       case 2: // Crossroads decision
-        if (choice === "Join the rebellion") {
+        if (choice === "Join the rebellion" && !newState.traits.Rebel) {
           if (newState.stats.courage >= 20) {
             newState.stats.courage += 10;
             newState.resultText = "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.";
