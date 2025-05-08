@@ -40,7 +40,20 @@ function getStatChangeText(oldStats: { strategy: number; unity: number; courage:
   if (newStats.courage !== oldStats.courage) changes.push(`Courage ${newStats.courage > oldStats.courage ? "+" : ""}${newStats.courage - oldStats.courage}`);
   if (newStats.suspicion !== oldStats.suspicion) changes.push(`Suspicion ${newStats.suspicion > oldStats.suspicion ? "+" : ""}${newStats.suspicion - oldStats.suspicion}`);
   if (newStats.reputation !== oldStats.reputation) changes.push(`Reputation ${newStats.reputation > oldStats.reputation ? "+" : ""}${newStats.reputation - oldStats.reputation}`);
-  return changes.length > 0 ? `\n\n${changes.join(", ")}` : "";
+  return changes.length > 0 ? `\n\nStatistic Changes: ${changes.join(", ")}` : "";
+}
+
+function getTraitChangeText(
+  oldTraits: GameState['traits'],
+  newTraits: GameState['traits']
+) {
+  const changes = [];
+  for (const key of Object.keys(newTraits) as Array<keyof GameState['traits']>) {
+    if (!oldTraits[key] && newTraits[key]) {
+      changes.push(`Trait unlocked: ${key}`);
+    }
+  }
+  return changes.length > 0 ? `\n${changes.join(", ")}` : "";
 }
 
 const Game: React.FC = () => {
@@ -75,6 +88,7 @@ const Game: React.FC = () => {
   const handleChoice = (choice: string) => {
     let newState = { ...gameState };
     let oldStats = { ...newState.stats };
+    let oldTraits = { ...newState.traits };
 
     switch (gameState.currentBranch) {
       case 0: {
@@ -89,6 +103,7 @@ const Game: React.FC = () => {
           newState.resultText = "You use your knowledge of the terrain to help villagers hide some valuables in the nearby hills. The tax collector leaves with fewer tributes but suspects the community is hiding resources.";
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
       }
@@ -108,6 +123,7 @@ const Game: React.FC = () => {
           newState.resultText = "The elder recalls stories of Inca resistance and describes images about a future where their people will regain the land. The elder's stories strengthen your connection to your community and fill you with hope for the future.";
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
@@ -128,6 +144,7 @@ const Game: React.FC = () => {
           newState.resultText = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community.";
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
@@ -163,6 +180,7 @@ const Game: React.FC = () => {
           }
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
@@ -182,6 +200,7 @@ const Game: React.FC = () => {
           newState.resultText = "You notice a group of newly arrived, exhausted rebels who haven't received any food and secretly let them get a portion before the general distribution, earning the gratitude of the newcomers and enhances your reputation.";
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
@@ -203,6 +222,7 @@ const Game: React.FC = () => {
             newState.resultText = "You report the discovery to the rebel leadership and suggest a small team to explore together. A scouting group confirms the trail and its strategic value without alerting the Spanish.";
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
@@ -239,6 +259,7 @@ const Game: React.FC = () => {
           }
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
@@ -255,6 +276,7 @@ const Game: React.FC = () => {
           newState.resultText = "You refuse their entry due to the fear of the consequences for your village. The rebels were forced to leave the village. However, some villagers whisper that your decision lacked compassion, while others wonder whether rejecting the rebels might one day come back to attack them.";
         }
         newState.resultText += getStatChangeText(oldStats, newState.stats);
+        newState.resultText += getTraitChangeText(oldTraits, newState.traits);
         newState.resultPending = true;
         break;
 
