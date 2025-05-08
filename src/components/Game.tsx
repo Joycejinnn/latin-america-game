@@ -129,11 +129,11 @@ const Game: React.FC = () => {
         if (choice === "Join the rebellion") {
             if (newState.stats.courage >= 20) {
               newState.stats.courage += 10;
+              newState.traits.Rebel = true;
               newState.resultText = "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.";
             } else {
               newState.resultText = "Your courage is not enough to join the rebellion. You must stay in the village.";
             }
-            newState.traits.Rebel = true;
         } else if (choice === "Stay in the village") {
           newState.stats.unity += 10;
           newState.resultText = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community. (You lack the rebel trait and can only choose stay in the village.)";
