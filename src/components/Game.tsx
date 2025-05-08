@@ -393,9 +393,10 @@ const Game: React.FC = () => {
           </div>
           <div className="stats-container">
             <h3>Traits</h3>
-            <div className="traits">
+            <div className="stats">
               {Object.entries(gameState.traits).map(([trait, unlocked]) => (
-                unlocked && <span className="trait" key={trait}>{trait}</span>
+                // unlocked && <span className="trait" key={trait}>{trait}</span>
+                unlocked && <span key={trait}>{trait}</span>
               ))}
             </div>
           </div>
