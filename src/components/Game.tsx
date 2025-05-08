@@ -27,6 +27,8 @@ interface GameState {
     description: string;
   } | null;
   page: number;
+  resultPending: boolean;
+  resultText: string;
 }
 
 const Game: React.FC = () => {
@@ -51,7 +53,9 @@ const Game: React.FC = () => {
     currentBranch: 0,
     gameEnded: false,
     ending: null,
-    page: 1
+    page: 1,
+    resultPending: false,
+    resultText: ""
   });
 
   const handleChoice = (choice: string) => {
@@ -62,16 +66,15 @@ const Game: React.FC = () => {
         if (choice === "Attempt to negotiate with the tax collector") {
           newState.stats.strategy += 5;
           newState.traits.Negotiator = true;
-          newState.currentScenario = "The tax collector scoffs but impressed by your community situation, agrees to postpone the payment slightly.";
-          newState.choices = ["Discuss rebellion rumors with the elder", "Continue dealing with tax issues"];
+          newState.resultText = "The tax collector scoffs but impressed by your community situation, agrees to postpone the payment slightly.";
+          newState.resultPending = true;
         } else if (choice === "Help villagers hide valuables in the hills") {
           newState.stats.strategy += 5;
           newState.stats.unity += 5;
           newState.stats.suspicion += 10;
-          newState.currentScenario = "The tax collector leaves with fewer tributes but suspects the community is hiding resources.";
-          newState.choices = ["Discuss rebellion rumors with the elder", "Continue dealing with tax issues"];
+          newState.resultText = "The tax collector leaves with fewer tributes but suspects the community is hiding resources.";
+          newState.resultPending = true;
         }
-        newState.currentBranch = 1;
         return setGameState(newState);
         break;
 
@@ -278,6 +281,26 @@ const Game: React.FC = () => {
     setGameState(newState);
   };
 
+  const handleNextResult = () => {
+    let newState = { ...gameState, resultPending: false, resultText: "" };
+
+    switch (gameState.currentBranch) {
+      case 0:
+        // negotiation/hide valuables之后，进入case1剧情和选项
+        newState.currentScenario = "Travelers from neighboring villages bring news of a growing rebellion led by Túpac Amaru II. He has claimed to be a descendant of the last Inca emperor, and aims to achieve an end to the mita system and other injustices and reform the ruling system.";
+        newState.choices = [
+          "The elder warns against the action",
+          "The elder expresses the necessity of change",
+          "The elder recalls stories of Inca resistance"
+        ];
+        newState.currentBranch = 1;
+        break;
+      // 其他case同理，按你的剧情结构推进
+      // ...
+    }
+    setGameState(newState);
+  };
+
   const checkEnding = (state: GameState) => {
     // Branch 1 endings (after scenario 7)
     if (state.currentBranch === 7) {
@@ -404,17 +427,20 @@ const Game: React.FC = () => {
           </div>
           <div className="stats-container">
             <h3>Traits</h3>
-            <div className="stats">
+            <div className="traits">
               {Object.entries(gameState.traits).map(([trait, unlocked]) => (
-                // unlocked && <span className="trait" key={trait}>{trait}</span>
-                unlocked && <span key={trait}>{trait}</span>
+                unlocked && <span className="trait" key={trait}>{trait}</span>
               ))}
             </div>
           </div>
           <div className="scenario">
-            <p>{gameState.currentScenario}</p>
+            <p>{gameState.resultPending ? gameState.resultText : gameState.currentScenario}</p>
           </div>
-          {!gameState.gameEnded ? (
+          {gameState.resultPending ? (
+            <div style={{ textAlign: "center" }}>
+              <button className="choice-button" onClick={handleNextResult}>Next</button>
+            </div>
+          ) : !gameState.gameEnded ? (
             <div className="choices">
               {gameState.choices.map((choice, index) => (
                 <button 
