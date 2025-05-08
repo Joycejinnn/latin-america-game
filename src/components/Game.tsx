@@ -401,7 +401,7 @@ const Game: React.FC = () => {
   const checkEnding = (state: GameState) => {
     // Branch 1 endings (after scenario 7)
     if (state.currentBranch === 7) {
-      if (state.stats.strategy >= 25 && state.stats.unity >= 25 && state.stats.courage >= 25) {
+      if (state.stats.strategy >= 25 && state.stats.courage >= 25) {
         return {
           title: "Legendary of the Andes",
           description: "You become a legendary leader—wise, brave, and deeply loved by your people. Under your guidance, the regions that you fight for successfully resist colonial control and remember your name for centuries."
@@ -411,7 +411,7 @@ const Game: React.FC = () => {
           title: "The Quiet Shield",
           description: "You protect your people through wisdom and solidarity, avoiding direct confrontation. Though the rebellion falters, your village survives and thrives in secret."
         };
-      } else if (state.stats.strategy < 25 && state.stats.courage >= 25) {
+      } else if (state.stats.courage >= 25) {
         return {
           title: "Where Hope Burned",
           description: "You charge into the rebellion with passion but little support or planning. You die a hero, but your efforts are buried in blood and didn't make a big change in the oppression situation."
@@ -419,33 +419,31 @@ const Game: React.FC = () => {
       } else {
         return {
           title: "The Very End",
-          description: "You are gradually pulled away from the front lines of the rebellion. Lacking direction, courage, and unity, you remain just a witness to history rather than a part of it."
+          description: "You are gradually pulled away from the front lines of the rebellion. Lacking direction and courage, you remain just a witness to history rather than a part of it."
         };
       }
     }
     
     // Branch 2 endings (after scenario 9)
     if (state.currentBranch === 9) {
-      if (state.stats.strategy >= 25 && state.stats.unity >= 25 && 
-          state.stats.courage >= 25 && state.stats.suspicion <= 50) {
+      if (state.stats.strategy >= 25 && state.stats.courage >= 25 && state.stats.unity >= 25 && state.stats.suspicion <= 50) {
         return {
           title: "The Shield of the People",
           description: "You navigated between rebellion and survival secretly without alerting the officials, helping the resistance while protecting your people. Your name becomes a symbol of wisdom and resilience."
         };
-      } else if (state.stats.strategy >= 25 && state.stats.courage < 25 && state.stats.suspicion <= 50) {
+      } else if ((state.stats.strategy >= 25 || state.stats.courage >= 25||state.stats.unity >= 25) && state.stats.suspicion <= 50) {
         return {
           title: "The Silent Guardian",
           description: "You chose moderation and patience. Through negotiation and careful offerings, you preserved the village. Some admire your wisdom; others question your indifferent to the rebellion cause."
         };
-      } else if (state.stats.strategy < 25 && state.stats.courage >= 25 && 
-                 state.stats.unity <= 15 && state.stats.suspicion >= 50) {
+      } else if (state.stats.suspicion > 50) {
         return {
-          title: "Where Hope Burned",
-          description: "Your open defiance sparked colonial retaliation. Lacking unity, the village collapsed under threat and pressure. Though your rebellion failed, your story becomes legend."
+          title: "The Very End",
+          description: "Your open defiance sparked colonial retaliation and attracted so much attention of the officials that the colonial government sent a force to control your community. None of Unity, Strategy, or Courage makes a difference in the end, and the village collapsed under threat and pressure."
         };
       } else {
         return {
-          title: "The Very End",
+          title: "Where Hope Burned",
           description: "You never made a firm stand. The village faded into obscurity, forgotten by both the colonizers and history. Silence replaced memory."
         };
       }
