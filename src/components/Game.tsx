@@ -30,6 +30,7 @@ interface GameState {
   page: number;
   resultPending: boolean;
   resultText: string;
+  retryCurrent?: boolean;
 }
 
 const Game: React.FC = () => {
@@ -57,7 +58,8 @@ const Game: React.FC = () => {
     ending: null,
     page: 1,
     resultPending: false,
-    resultText: ""
+    resultText: "",
+    retryCurrent: false
   });
 
   const handleChoice = (choice: string) => {
@@ -120,20 +122,30 @@ const Game: React.FC = () => {
             newState.stats.strategy += 5;
             newState.stats.unity += 5;
             newState.resultText = "The rebels achieve a surprising victory due to your terrain strategy and gain valuable supplies.";
+            newState.retryCurrent = false;
           } else {
-            newState.resultText = "Your strategy is not sufficient for this complex maneuver.";
+            newState.resultText = "Your strategy is not sufficient for this complex maneuver. Please choose another option.";
+            newState.retryCurrent = true;
           }
         } else if (choice === "Fight bravely at the front") {
           if (newState.stats.courage >= 25) {
             newState.stats.courage -= 5;
             newState.resultText = "You fight bravely at the front, inspiring your comrades with your courage. You hold your ground, but suffer heavily.";
+            newState.retryCurrent = false;
           } else {
-            newState.resultText = "Your courage is not enough for this dangerous option.";
+            newState.resultText = "Your courage is not enough for this dangerous option. Please choose another option.";
+            newState.retryCurrent = true;
           }
         } else if (choice === "Protect the wounded") {
+          if (newState.stats.unity >= 25) {
             newState.stats.unity += 2;
             newState.stats.courage -= 2;
             newState.resultText = "You focus on protecting the wounded and helping them retreat to the safe place. Few people sacrificed, and the fight ends in a retreat.";
+            newState.retryCurrent = false;
+          } else {
+            newState.resultText = "Your unity is not enough to effectively protect the wounded. Please choose another option.";
+            newState.retryCurrent = true;
+          }
         }
         newState.resultPending = true;
         break;
@@ -161,13 +173,16 @@ const Game: React.FC = () => {
           if (newState.stats.courage >= 30) {
             newState.stats.courage += 5;
             newState.stats.strategy += 5;
+            newState.retryCurrent = false;
             newState.resultText = "You explore the path alone first, hoping to gain a strategic advantage for the rebels. After a while, you discover a shortcut but also spot a small group of Spanish soldiers. You get back quickly with this message, reorganize the scouting routine and warn everyone to feel alert.";
           } else {
-            newState.resultText = "Your courage is not enough to explore the path alone.";
+            newState.retryCurrent = true;
+            newState.resultText = "Your courage is not enough to explore the path alone. Please choose another option.";
           }
         } else if (choice === "Report to the leadership") {
             newState.stats.unity += 5;
             newState.stats.strategy += 5;
+            newState.retryCurrent = false;
             newState.resultText = "You report the discovery to the rebel leadership and suggest a small team to explore together. A scouting group confirms the trail and its strategic value without alerting the Spanish.";
         }
         newState.resultPending = true;
@@ -183,21 +198,26 @@ const Game: React.FC = () => {
           if (newState.traits.Negotiator && newState.stats.unity >= 25) {
             newState.stats.strategy += 5;
             newState.stats.suspicion += 5;
+            newState.retryCurrent = false;
             newState.resultText = "You plead with the corregidor, emphasizing the village's poverty and inability to meet his demands. The corregidor is unmoved but fearing your potential unrest, and finally agrees to slightly reduce his demands.";
           } else {
-            newState.resultText = "You lack the necessary traits or unity to effectively plead with the corregidor.";
+            newState.retryCurrent = true;
+            newState.resultText = "You lack the necessary traits or unity to effectively plead with the corregidor. Please choose another option.";
           }
         } else if (choice === "Offer small supplies") {
           newState.stats.strategy += 10;
           newState.stats.suspicion += 10;
+          newState.retryCurrent = false;
           newState.resultText = "You offer a small amount of supplies but subtly warn that excessive demands could lead to unrest situation. The corregidor accepts the offer, but stays alert to the villagers.";
         } else if (choice === "Refuse the requirement") {
           if (newState.stats.courage >= 30) {
             newState.stats.courage -= 15;
             newState.stats.suspicion += 15;
+            newState.retryCurrent = false;
             newState.resultText = "The corregidor is enraged and threatens immediate retaliation.";
           } else {
-            newState.resultText = "Your courage is not enough to openly defy the corregidor.";
+            newState.retryCurrent = true;
+            newState.resultText = "Your courage is not enough to openly defy the corregidor. Please choose another option.";
           }
         }
         newState.resultPending = true;
@@ -228,6 +248,12 @@ const Game: React.FC = () => {
   const handleNextResult = () => {
     const lastResult = gameState.resultText;
     let newState = { ...gameState, resultPending: false, resultText: "" };
+
+    if (gameState.retryCurrent) {
+      newState.retryCurrent = false;
+      setGameState(newState);
+      return;
+    }
 
     switch (gameState.currentBranch) {
       case 0:
@@ -271,7 +297,7 @@ const Game: React.FC = () => {
         break;
 
       case 3:
-        newState.currentScenario = "After a successful fight, the rebels gain a small supply of food. Under the situation that the colonial government transformed indigenous community lands into plantation-based economies, indigenous’s self-sufficiency got limited and food became a rare resource. You are assigned to manage the distribution.";
+        newState.currentScenario = "After a successful fight, the rebels gain a small supply of food. Under the situation that the colonial government transformed indigenous community lands into plantation-based economies, indigenous's self-sufficiency got limited and food became a rare resource. You are assigned to manage the distribution.";
         newState.choices = [
           "Distribute food equally",
           "Reward the brave fighters",
