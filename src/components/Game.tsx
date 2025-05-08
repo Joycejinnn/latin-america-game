@@ -300,6 +300,7 @@ const Game: React.FC = () => {
       case 7:
         const ending1 = checkEnding({ ...newState, currentBranch: 7 });
         if (ending1) {
+          newState.currentScenario = newState.resultText;
           newState.gameEnded = true;
           newState.ending = ending1;
         }
@@ -317,6 +318,7 @@ const Game: React.FC = () => {
       case 8:
         const ending2 = checkEnding({ ...newState, currentBranch: 9 });
         if (ending2) {
+          newState.currentScenario = newState.resultText;
           newState.gameEnded = true;
           newState.ending = ending2;
         }
