@@ -98,7 +98,7 @@ Result: The rebels were forced to leave the village. For now, the village is spa
 Stat Change: Unity -5, Colonial Authority Suspicion -5, Reputation -5.
 
 
-Branch 1: Following Túpac Amaru II - Ending Matrix （High>=25, Low<25）
+Branch 1: Following Túpac Amaru II - Ending Matrix (High>=25, Low<25)
 
 Stat Combination
 Ending Title

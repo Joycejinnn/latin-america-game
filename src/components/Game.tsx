@@ -33,6 +33,16 @@ interface GameState {
   retryCurrent?: boolean;
 }
 
+function getStatChangeText(oldStats: { strategy: number; unity: number; courage: number; suspicion: number; reputation: number; }, newStats: { strategy: number; unity: number; courage: number; suspicion: number; reputation: number; }) {
+  const changes = [];
+  if (newStats.strategy !== oldStats.strategy) changes.push(`Strategy ${newStats.strategy > oldStats.strategy ? "+" : ""}${newStats.strategy - oldStats.strategy}`);
+  if (newStats.unity !== oldStats.unity) changes.push(`Unity ${newStats.unity > oldStats.unity ? "+" : ""}${newStats.unity - oldStats.unity}`);
+  if (newStats.courage !== oldStats.courage) changes.push(`Courage ${newStats.courage > oldStats.courage ? "+" : ""}${newStats.courage - oldStats.courage}`);
+  if (newStats.suspicion !== oldStats.suspicion) changes.push(`Suspicion ${newStats.suspicion > oldStats.suspicion ? "+" : ""}${newStats.suspicion - oldStats.suspicion}`);
+  if (newStats.reputation !== oldStats.reputation) changes.push(`Reputation ${newStats.reputation > oldStats.reputation ? "+" : ""}${newStats.reputation - oldStats.reputation}`);
+  return changes.length > 0 ? `\n\nStat Change: ${changes.join(", ")}` : "";
+}
+
 const Game: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>({
     year: 1780,
@@ -64,9 +74,10 @@ const Game: React.FC = () => {
 
   const handleChoice = (choice: string) => {
     let newState = { ...gameState };
+    let oldStats = { ...newState.stats };
 
     switch (gameState.currentBranch) {
-      case 0: // Initial scenario
+      case 0: {
         if (choice === "Attempt to negotiate with the tax collector") {
           newState.stats.strategy += 5;
           newState.traits.Negotiator = true;
@@ -77,8 +88,10 @@ const Game: React.FC = () => {
           newState.stats.suspicion += 10;
           newState.resultText = "You use your knowledge of the terrain to help villagers hide some valuables in the nearby hills. The tax collector leaves with fewer tributes but suspects the community is hiding resources.";
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
+      }
 
       case 1: // Elder discussion
         if (choice === "The elder warns against the action") {
@@ -94,6 +107,7 @@ const Game: React.FC = () => {
           newState.traits.Rebel = true;
           newState.resultText = "The elder recalls stories of Inca resistance and describes images about a future where their people will regain the land. The elder's stories strengthen your connection to your community and fill you with hope for the future.";
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -113,6 +127,7 @@ const Game: React.FC = () => {
           newState.stats.unity += 10;
           newState.resultText = "You decide to stay in your village. You feel a heavy struggle between the unchosen rebel path and the current choice, adjusting what situation the rebel is facing. But you're determined to protect your community.";
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -147,6 +162,7 @@ const Game: React.FC = () => {
             newState.retryCurrent = true;
           }
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -165,6 +181,7 @@ const Game: React.FC = () => {
           newState.traits.CompassionateLeader = true;
           newState.resultText = "You notice a group of newly arrived, exhausted rebels who haven't received any food and secretly let them get a portion before the general distribution, earning the gratitude of the newcomers and enhances your reputation.";
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -185,6 +202,7 @@ const Game: React.FC = () => {
             newState.retryCurrent = false;
             newState.resultText = "You report the discovery to the rebel leadership and suggest a small team to explore together. A scouting group confirms the trail and its strategic value without alerting the Spanish.";
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -220,6 +238,7 @@ const Game: React.FC = () => {
             newState.resultText = "Your courage is not enough to openly defy the corregidor. Please choose another option.";
           }
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -235,6 +254,7 @@ const Game: React.FC = () => {
           newState.stats.reputation -= 5;
           newState.resultText = "You refuse their entry due to the fear of the consequences for your village. The rebels were forced to leave the village. However, some villagers whisper that your decision lacked compassion, while others wonder whether rejecting the rebels might one day come back to attack them.";
         }
+        newState.resultText += getStatChangeText(oldStats, newState.stats);
         newState.resultPending = true;
         break;
 
@@ -458,7 +478,7 @@ const Game: React.FC = () => {
               setGameState({
                 ...gameState,
                 page: 3,
-                currentScenario: "A Spanish tax collector arrives in your village who is known for his cruelty, asking for immediate payment. The forced purchase of unwanted and overpriced Spanish goods (the reparto system) often leads to debt and further exploitation.",
+                currentScenario: "A Spanish tax collector known for his cruelty arrives in your village, asking for immediate payment. The forced purchase of unwanted and overpriced Spanish goods (the reparto system) often leads to debt and further exploitation.",
                 choices: [
                   "Attempt to negotiate with the tax collector",
                   "Help villagers hide valuables in the hills"
