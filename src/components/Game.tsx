@@ -400,7 +400,7 @@ const Game: React.FC = () => {
               The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.
             </p>
             <img
-              src="../assets/plantation.jpg"
+              src={plantation}
               alt="Plantation"
               className="scenario-image"
               style={{ marginTop: 20, maxWidth: "100%", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
@@ -454,9 +454,10 @@ const Game: React.FC = () => {
           </div>
           <div className="stats-container">
             <h3>Traits</h3>
-            <div className="traits">
+            <div className="stats">
               {Object.entries(gameState.traits).map(([trait, unlocked]) => (
-                unlocked && <span className="trait" key={trait}>{trait}</span>
+                // unlocked && <span className="trait" key={trait}>{trait}</span>
+                unlocked && <span key={trait}>{trait}</span>
               ))}
             </div>
           </div>
