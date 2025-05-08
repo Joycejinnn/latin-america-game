@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Game.css';
+import 'public/plantation.jpg';
 
 interface GameState {
   year: number;
