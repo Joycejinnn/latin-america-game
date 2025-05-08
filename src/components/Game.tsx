@@ -82,25 +82,30 @@ const Game: React.FC = () => {
         if (choice === "The elder warns against the action") {
           newState.stats.strategy += 5;
           newState.stats.courage -= 5;
-          newState.traits.Rebel = true;
           newState.resultText = " The elder warns against the action, emphasizing the strength of the Spanish army and the risks to your community. His words make you more cautious but also slightly decrease your hope.";
         } else if (choice === "The elder expresses the necessity of change") {
           newState.stats.courage += 5;
+          newState.traits.Rebel = true;
           newState.resultText = "The elder expresses the necessity of change and the possibility of finally getting rid of the ruling from the colonizers, urging you to consider joining their cause.";
         } else if (choice === "The elder recalls stories of Inca resistance") {
           newState.stats.unity += 5;
+          newState.traits.Rebel = true;
           newState.resultText = "The elder recalls stories of Inca resistance and describes images about a future where their people will regain the land. The elder's stories strengthen your connection to your community and fill you with hope for the future.";
         }
         newState.resultPending = true;
         break;
 
       case 2: // Crossroads decision
-        if (choice === "Join the rebellion" && !newState.traits.Rebel) {
-          if (newState.stats.courage >= 20) {
-            newState.stats.courage += 10;
-            newState.resultText = "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.";
-          } else {
-            newState.resultText = "Your courage is not enough to join the rebellion. You must stay in the village.";
+        if (choice === "Join the rebellion") {
+          if (newState.traits.Rebel) {
+            if (newState.stats.courage >= 20) {
+              newState.stats.courage += 10;
+              newState.resultText = "You leave your village and join the growing group of the indigenous rebels as a subgroup leader. The rebellion drew support from various social groups and there were not just indigenous farmers, but also some mestizos and even a few Creoles.";
+            } else {
+              newState.resultText = "Your courage is not enough to join the rebellion. You must stay in the village.";
+            }
+          }else{
+              newState.resultText = "After the disscussion with the elder, you carefully consider the warning and balance the risk as well as the opportunity, and finally decide to stay in the village.";
           }
         } else if (choice === "Stay in the village") {
           newState.stats.unity += 10;
