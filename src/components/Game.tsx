@@ -334,7 +334,7 @@ const Game: React.FC = () => {
   return (
     <div className="game-container">
       <div className="game-header">
-        <h1>The Shadow of the Andes</h1>
+        <h1>The Resistance of the Andes</h1>
         <div className="stats">
           <span>Stategy: {gameState.stats.strategy}</span>
           <span>Unity: {gameState.stats.unity}</span>
