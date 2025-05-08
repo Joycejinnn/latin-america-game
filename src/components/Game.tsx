@@ -40,7 +40,7 @@ function getStatChangeText(oldStats: { strategy: number; unity: number; courage:
   if (newStats.courage !== oldStats.courage) changes.push(`Courage ${newStats.courage > oldStats.courage ? "+" : ""}${newStats.courage - oldStats.courage}`);
   if (newStats.suspicion !== oldStats.suspicion) changes.push(`Suspicion ${newStats.suspicion > oldStats.suspicion ? "+" : ""}${newStats.suspicion - oldStats.suspicion}`);
   if (newStats.reputation !== oldStats.reputation) changes.push(`Reputation ${newStats.reputation > oldStats.reputation ? "+" : ""}${newStats.reputation - oldStats.reputation}`);
-  return changes.length > 0 ? `\n\nStat Change: ${changes.join(", ")}` : "";
+  return changes.length > 0 ? `\n\n${changes.join(", ")}` : "";
 }
 
 const Game: React.FC = () => {
