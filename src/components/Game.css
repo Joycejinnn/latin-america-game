@@ -67,6 +67,14 @@
   white-space: pre-line;
 }
 
+.scenario-image {
+  display: block;
+  margin: 20px auto 0 auto;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
 .choices {
   display: flex;
   flex-direction: column;

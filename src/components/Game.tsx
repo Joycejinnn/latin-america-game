@@ -342,7 +342,10 @@ const Game: React.FC = () => {
         <div>
           <div className="scenario">
             <p>
-              In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.
+              In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living.
+            </p>
+            <p>
+              The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.
             </p>
             <img
               src="/plantation.jpg"
