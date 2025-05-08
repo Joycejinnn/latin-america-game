@@ -45,7 +45,7 @@ const Game: React.FC = () => {
       Negotiator: false,
       CompassionateLeader: false
     },
-    currentScenario: "In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.\n\nYou are Amaru, a young indigenous man known in your community for:\n- Your deep understanding of the local terrain and the hidden trails in the mountains\n- Your close tie to the community and your ability to handle disputes between families\n- Your strong dissatisfaction against the colonizers",
+    currentScenario: "In 1780, there was an Indian village under the Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.\n\nYou are Amaru, a young indigenous man known in your community for:\n- Your deep understanding of the local terrain and the hidden trails in the mountains\n- Your close tie to the community and your ability to handle disputes between families\n- Your strong dissatisfaction against the colonizers",
     choices: ["Attempt to negotiate with the tax collector", "Help villagers hide valuables in the hills"],
     currentBranch: 0,
     gameEnded: false,
@@ -344,6 +344,12 @@ const Game: React.FC = () => {
             <p>
               In 1780, there was an Indian village under the majestic Andes Mountains in the Viceroyalty of Peru. For centuries, the indigenous people of this land had lived under the oppressive ruling of Spanish colonizers. Heavy burdens, such as the forced labor in the Potosí silver mines (mita), the harsh taxes levied on basic necessities (alcabala), and the cultural disrespect, left the people struggling for living. The older people still talked about the days when the Inca Empire was strong and prosperous, while many families struggled to maintain the way of life under this relentless exploitation. The prosperity in memory and the exploitation in reality further exacerbated their discontent.
             </p>
+            <img
+              src="/plantation.jpg"
+              alt="Plantation"
+              className="scenario-image"
+              style={{ marginTop: 20, maxWidth: "100%", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+            />
           </div>
           <div style={{ textAlign: "center" }}>
             <button className="choice-button" onClick={() => setGameState({ ...gameState, page: 2 })}>
