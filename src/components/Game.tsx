@@ -498,7 +498,7 @@ const Game: React.FC = () => {
               setGameState({
                 ...gameState,
                 page: 3,
-                currentScenario: "A Spanish tax collector known for his cruelty arrives in your village, asking for immediate payment. The forced purchase of unwanted and overpriced Spanish goods (the reparto system) often leads to debt and further exploitation.",
+                currentScenario: "A Spanish tax collector known for his cruelty arrives in your village, asking for immediate payment. The forced purchase of unwanted and overpriced Spanish goods often leads to debt and further exploitation.",
                 choices: [
                   "Attempt to negotiate with the tax collector",
                   "Help villagers hide valuables in the hills"
